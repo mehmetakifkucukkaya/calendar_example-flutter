@@ -31,6 +31,17 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: SafeArea(
         child: SfCalendar(
+          allowDragAndDrop: true,
+          showNavigationArrow: true,
+          showWeekNumber: true,
+          weekNumberStyle: WeekNumberStyle(
+            textStyle: TextStyle(color: Colors.grey[700], fontSize: 13),
+          ),
+          resourceViewSettings: const ResourceViewSettings(
+            size: 100,
+            displayNameTextStyle: TextStyle(
+                color: Colors.black, fontSize: 15, fontWeight: FontWeight.w400),
+          ),
           view: CalendarView.month,
           dataSource: MeetingDataSource(_getDataSource()),
           // by default the month appointment display mode set as Indicator, we can
@@ -48,9 +59,14 @@ class _MyHomePageState extends State<MyHomePage> {
     final DateTime today = DateTime.now();
     final DateTime startTime = DateTime(today.year, today.month, today.day, 9);
     final DateTime endTime = startTime.add(const Duration(hours: 2));
-    meetings.add(
-        Meeting('Parti', startTime, endTime, const Color(0xFF0F8644), false));
-    meetings.add(Meeting('Parti', startTime, endTime, Colors.red, false));
+    meetings.add(Meeting(
+        'Conference', startTime, endTime, const Color(0xFF0F8644), false));
+    meetings.add(Meeting(
+        'Parti',
+        DateTime(today.year, today.month, today.day, 7),
+        startTime.add(const Duration(hours: 0)),
+        Colors.red,
+        false));
     return meetings;
   }
 }
